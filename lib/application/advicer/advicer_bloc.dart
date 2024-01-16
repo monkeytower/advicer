@@ -10,14 +10,12 @@ part 'advicer_event.dart';
 part 'advicer_state.dart';
 
 class AdvicerBloc extends Bloc<AdvicerEvent, AdvicerState> {
-  AdvicerBloc() : super(AdvicerInitial()) {
-    final usecases = AdvicerUsecases();
+  final AdvicerUsecases usecases;
 
+  AdvicerBloc({required this.usecases}) : super(AdvicerInitial()) {
     on<AdviceRequestedEvent>((event, emit) async {
       emit(AdvicerStateLoading());
 
-      // get advice..
-      // await sleep1();
       Either<Failure, AdviceEntity> adviceOrFailure =
           await usecases.getAdviceUsecase();
 
@@ -26,11 +24,36 @@ class AdvicerBloc extends Bloc<AdvicerEvent, AdvicerState> {
               emit(AdvicerStateError(message: _mapFailureToMessage(failure))),
           (advice) => emit(AdvicerStateLoaded(advice: advice.advice)));
     });
-
-    on<ExampleEvent>((event, emit) {
-      // TODO: implement event handler
-    });
   }
+
+// class AdvicerBloc extends Bloc<AdvicerEvent, AdvicerState> {
+//   AdvicerBloc({required this.usecases}) : super(AdvicerInitial());
+//   final AdvicerUsecases usecases;
+
+// class AdvicerBloc extends Bloc<AdvicerEvent, AdvicerState> {
+//   AdvicerBloc({required this.usecases}) : super(AdvicerInitial());
+//     final AdvicerUsecases usecases;
+
+// @override
+
+//     on<AdviceRequestedEvent>((event, emit) async {
+//       emit(AdvicerStateLoading());
+
+//       // get advice..
+//       // await sleep1();
+//       Either<Failure, AdviceEntity> adviceOrFailure =
+//           await usecases.getAdviceUsecase();
+
+//       adviceOrFailure.fold(
+//           (failure) =>
+//               emit(AdvicerStateError(message: _mapFailureToMessage(failure))),
+//           (advice) => emit(AdvicerStateLoaded(advice: advice.advice)));
+//     });
+
+//     on<ExampleEvent>((event, emit) {
+//       // TODO: implement event handler
+//     });
+//   }
 
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
