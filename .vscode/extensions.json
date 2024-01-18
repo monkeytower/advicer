@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "cardinal90.multi-cursor-case-preserve"
+        "cardinal90.multi-cursor-case-preserve",
+        "sourcegraph.cody-ai"
     ]
 }
