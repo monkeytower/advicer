@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:advicer/domain/repositories/advicer_repository.dart';
 import 'package:mockito/mockito.dart';
 
-import 'advicer_usecases_tests.mocks.dart';
+import 'advicer_usecases_test.mocks.dart';
 // import 'package:mockito/mockito.dart';
 
 @GenerateMocks([AdvicerRepository])
